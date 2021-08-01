@@ -34,9 +34,9 @@ You can use it on any other operating system having bash.</p>
    -  You can use `git --version` to check. 
    -  If not installed, use `pkg install git`
 4. Clone the repository:
-    `git clone https://github.com/CISSSCO/gitpush.git`
+    `git clone https://github.com/CISSSCO/GitPush.git`
 5. Now Install:
-    `cd gitpush`
+    `cd GitPush`
     `cp gitpush ~/../usr/bin/gitpush`
 6. To check if installed or not, use `gitpush -h`. It will output a help file. 
 
@@ -46,8 +46,8 @@ _Steps are mostly similar to android_
 2.  Check if git is installed, `git --version`. 
 3.  Now follow these:
     ```bash
-    git clone https://github.com/CISSSCO/gitpush.git
-    cd gitpush
+    git clone https://github.com/CISSSCO/GitPush.git
+    cd GitPush
     sudo cp gitpush /usr/bin/gitpush
 
     #For mac if above line does not work
@@ -67,8 +67,8 @@ _Steps are mostly similar to android_
 8.  Check for git- `git --version`
 9.  
     ```bash
-    git clone https://github.com/CISSSCO/gitpush.git
-    cd gitpush
+    git clone https://github.com/CISSSCO/GitPush.git
+    cd GitPush
     sudo cp gitpush /usr/bin/gitpush
     #For git bash
     cp gitpush /usr/bin/
