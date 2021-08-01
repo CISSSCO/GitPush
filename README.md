@@ -4,7 +4,7 @@
 
 <h3 align="center">About:</h3>
 
-<p align="center">This is mostly for linux terminal or it will also work on wsl for windows like ubuntu, debian, kali or any other wsl version windows has.
+<p align="center">Whenever working in a git repo in terminal or shell, you can use the command with desired option, it will do all your task automatically. This is mostly for linux terminal or it will also work on wsl for windows like ubuntu, debian, kali or any other wsl version windows has.
 The Installation and setup guide are given below.
 You can use it on any other operating system having bash.</p>
 
