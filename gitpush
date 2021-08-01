@@ -1,0 +1,188 @@
+#!/bin/bash
+
+
+         ########   ######     ###########     ########      #####
+        #######     ######    ###########     #######      ###   ###
+       #######        ##      ######         #######      ###     ###
+       ###            ##       #######       ###          ###     ###
+       ###            ##           #####     ###          ###     ###
+       ###            ##           ######    ###          ###     ###
+       ########       ##          #######    ######       ###     ###
+        #######     ######    ##########      #######      ###   ###
+         #######    ######   ##########        ########      #####
+
+
+################################################################################
+################################################################################
+#                            Author: Cisco Ramon                               #
+#                                                                              #
+#                                                                              #
+# Change History                                                               #
+# 01/08/2021  Cisco Ramon   This program is helpful in automating some of the  #
+#                           common task that we perform on regular basis       #
+#                           on git.                                            #
+#                                                                              #
+#                                                                              #
+################################################################################
+################################################################################
+
+
+
+
+#These are options asigned to be used as arguments or parameters to calling script
+op1="$1"
+op2="$2"
+
+#used to take multiple files
+declare -A nfiles
+currentDate=$(date +%b-%d)
+currentTime=$(date +%H:%M)
+DefaultCommit="Updated on $currentDate at $currentTime"
+confirm="y"
+
+
+Help() {
+    echo
+    echo
+    echo "################################################################"
+    echo "#                                                              #"
+    echo "# Usage: gitpush [] [--options]                                #"
+    echo "# Avaiable options:                                            #"
+    echo "#                                                              #"
+    echo "# --default      :   called automatically if no args passed    #"
+    echo "#                    (command) ->  gitpush . DefaultCommit     #"
+    echo "#                    DefaultCommit is Updated on Date at Time  #"
+    echo "#                                                              #"
+    echo "# --help or -h   :      open help or man pages                 #"
+    echo "#                                                              #"
+    echo "# --files or -f  :   ask for number of files as arguments      #"
+    echo "#                                                              #"
+    echo "# --i            :   open interactive menu based cli           #"
+    echo "#                    choose desire option (Added soon)         #"
+    echo "#                                                              #"
+    echo "################################################################"
+    echo
+    echo
+
+}
+
+Default() {
+
+    echo
+    echo
+    echo    "##########################################################"
+    echo    "#                  Default Mode Started                  #"
+    echo    "##########################################################"
+    echo
+    echo
+    git status
+    echo
+    git add .
+    echo
+    git status
+    echo
+    echo
+    git commit -m "$DefaultCommit"
+    echo
+    echo "Your commit message is :  $DefaultCommit"
+    echo
+    echo
+    git push
+    echo
+    echo
+    echo    "##########################################################"
+    echo    "#                       It's Done.                       #"
+    echo    "##########################################################"
+    echo
+    echo
+
+
+
+}
+
+
+# To check if interactive mode is activated or not
+if [[ $op1 == "-i" ]]; then
+    echo 
+    echo
+    echo    "#############################################################"
+    echo    "#          Interactive mode will be added soon.             #"
+    echo    "#  Use -h or --help for get the list of available options.  #"
+    echo    "#############################################################"
+    echo
+    echo
+    exit 0
+fi
+
+
+#To check if no parameters is passed
+if [ $# == 0 ]; then
+    Default
+    exit 0
+fi
+
+
+#To check conditions for arguments and parameters
+if [[ $op1 == "--help" ]]; then
+    Help
+    exit 0
+fi
+
+if [[ $op1 == "-h" ]]; then
+    Help
+    exit 0
+fi
+
+#Functino defined for git add
+function add {
+    if [[ $op1 == "--files" ]]; then
+        read -p "Enter filenames seperated by space: " nfiles
+    
+    elif [[ $op1 == "-f" ]]; then
+        read -p "Enter filenames seperated by space: " nfiles
+
+    fi
+    git add ${nfiles[*]}
+    
+}
+
+#Function to commit 
+function com {
+    echo "Default commmit message is: ($DefaultCommit)"
+    read -p "Do you want to change it? [y]: " confirm
+    if [ $confirm == "y" ]; then
+        read -p "Enter your commit message: " DefaultCommit
+        git commit -m "$DefaultCommit"
+    else
+        git commit -m "$DefaultCommit"
+    fi
+}
+
+
+git status
+echo
+read -p "Press any key to continue..."
+add         #calling add function
+echo
+git status
+read -p "Press any key to continue..."
+echo
+com
+echo
+
+git push 
+
+
+####################################################################
+##                                                                ##
+##     ###########                  ########                      ##
+##         #  #    #  ######       #         ##    #  ######      ##
+##        #  #    #  #            #         # #   #    #    #     ##
+##        #  ######  ######       ######    #  #  #    #     #    ##
+##        #  #    #  #            #         #   # #    #    #     ##
+##         #  #    #  ######       #######   #    ##  #####       ##
+##                                                                ##
+####################################################################
+
+
+
