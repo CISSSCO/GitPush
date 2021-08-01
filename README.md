@@ -75,6 +75,15 @@ _Steps are mostly similar to android_
     ```
 10. Now Enjoy!!!
 
+<h3 align="center">Support the Project:</h3>
+
+If you are using this project and are happy with it or just want to encourage me to continue creating stuff, there are few ways you can do it:
+
+-   Starrring and sharing the project
+-   Giving proper credit when you use GitPush on your README, linking back to it.
+
+>THANKS!
+
 
 <h3 align="center">License and Copyright:</h3>
 
