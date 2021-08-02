@@ -4,7 +4,7 @@
 
 <h3 align="center">About:</h3>
 
-<p align="center">This is mostly for linux terminal or it will also work on wsl for windows like ubuntu, debian, kali or any other wsl version windows has.
+<p align="center">Whenever working in a git repo in terminal or shell, you can use the command with desired option, it will do all your task automatically. This is mostly for linux terminal or it will also work on wsl for windows like ubuntu, debian, kali or any other wsl version windows has.
 The Installation and setup guide are given below.
 You can use it on any other operating system having bash.</p>
 
@@ -34,9 +34,9 @@ You can use it on any other operating system having bash.</p>
    -  You can use `git --version` to check. 
    -  If not installed, use `pkg install git`
 4. Clone the repository:
-    `git clone https://github.com/CISSSCO/gitpush.git`
+    `git clone https://github.com/CISSSCO/GitPush.git`
 5. Now Install:
-    `cd gitpush`
+    `cd GitPush`
     `cp gitpush ~/../usr/bin/gitpush`
 6. To check if installed or not, use `gitpush -h`. It will output a help file. 
 
@@ -46,8 +46,8 @@ _Steps are mostly similar to android_
 2.  Check if git is installed, `git --version`. 
 3.  Now follow these:
     ```bash
-    git clone https://github.com/CISSSCO/gitpush.git
-    cd gitpush
+    git clone https://github.com/CISSSCO/GitPush.git
+    cd GitPush
     sudo cp gitpush /usr/bin/gitpush
 
     #For mac if above line does not work
@@ -67,8 +67,8 @@ _Steps are mostly similar to android_
 8.  Check for git- `git --version`
 9.  
     ```bash
-    git clone https://github.com/CISSSCO/gitpush.git
-    cd gitpush
+    git clone https://github.com/CISSSCO/GitPush.git
+    cd GitPush
     sudo cp gitpush /usr/bin/gitpush
     #For git bash
     cp gitpush /usr/bin/
