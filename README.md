@@ -76,9 +76,11 @@ _Steps are mostly similar to android_
 10. Now Enjoy!!!
 
 <h3 align="center">How to Use:</h3>
-    
-    A brief documentation is available on how to use this tool.
-    Open the <a href="./DOC.md"> DOCUMENTATION </a>
+
+<p align="center">    
+A brief documentation is available on how to use this tool.
+Open the <a href="./DOC.md"> DOCUMENTATION </a>
+</p>
 
 
 <h3 align="center">Support the Project:</h3>
