@@ -75,6 +75,12 @@ _Steps are mostly similar to android_
     ```
 10. Now Enjoy!!!
 
+<h3 align="center">How to Use:</h3>
+    
+    A brief documentation is available on how to use this tool.
+    Head toward the [DOC](./DOC.md).
+
+
 <h3 align="center">Support the Project:</h3>
 
 If you are using this project and are happy with it or just want to encourage me to continue creating stuff, there are few ways you can do it:

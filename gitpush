@@ -53,7 +53,7 @@ Help() {
     echo "#                    (command) ->  gitpush . DefaultCommit     #"
     echo "#                    DefaultCommit is Updated on Date at Time  #"
     echo "#                                                              #"
-    echo "# --help or -h   :      open help or man pages                 #"
+    echo "# --help or -h   :   open help or man pages                    #"
     echo "#                                                              #"
     echo "# --files or -f  :   ask for number of files as arguments      #"
     echo "#                                                              #"
