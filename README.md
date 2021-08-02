@@ -67,11 +67,13 @@ _Steps are mostly similar to android_
 8.  Check for git- `git --version`
 9.  
     ```bash
+    #if you are using git bash open it as administrator
     git clone https://github.com/CISSSCO/GitPush.git
     cd GitPush
     sudo cp gitpush /usr/bin/gitpush
     #For git bash
-    cp gitpush /usr/bin/
+
+    cp -f gitpush /usr/bin/
     ```
 10. Now Enjoy!!!
 
