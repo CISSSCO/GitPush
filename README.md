@@ -78,7 +78,7 @@ _Steps are mostly similar to android_
 <h3 align="center">How to Use:</h3>
     
     A brief documentation is available on how to use this tool.
-    Head toward the [DOC](./DOC.md).
+    Open the <a href="./DOC.md"> DOCUMENTATION </a>
 
 
 <h3 align="center">Support the Project:</h3>
