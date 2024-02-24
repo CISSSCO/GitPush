@@ -40,7 +40,7 @@ interactiveModeMenu() {
 
 interactiveMode() {
     while [ 1 == 1 ]; do
-        interactiveMode
+        interactiveModeMenu
         read -p "Enter your choice: " choice
         case $choice in
             1) git status ;;
@@ -71,14 +71,14 @@ gitConfig() {
         case $op in
         1) git config -l ;;
         2) 
-            read -p "Enter name: " name
+            read -p "Enter name: " fullName
             read -p "Enter email: " email
-            read -p "Save config local to repo or global (l/g): [g]" ch
+            read -p "Save config local to repo or global (l/g): [g] " ch
             if [[ $ch == 'l' ]]; then
-                git config --local user.name $name
+                git config --local user.name "$fullName"
                 git config --local user.email $email
             else
-                git config --global user.name $name
+                git config --global user.name "$fullName"
                 git config --global user.email $email
             fi
             ;;
