@@ -1,17 +1,5 @@
 #!/bin/bash
 
-
-         ########   ######     ###########     ########      #####
-        #######     ######    ###########     #######      ###   ###
-       #######        ##      ######         #######      ###     ###
-       ###            ##       #######       ###          ###     ###
-       ###            ##           #####     ###          ###     ###
-       ###            ##           ######    ###          ###     ###
-       ########       ##          #######    ######       ###     ###
-        #######     ######    ##########      #######      ###   ###
-         #######    ######   ##########        ########      #####
-
-
 ################################################################################
 ################################################################################
 #                            Author: Cisco Ramon                               #
@@ -26,9 +14,6 @@
 ################################################################################
 ################################################################################
 
-
-
-
 #These are options asigned to be used as arguments or parameters to calling script
 op1="$1"
 op2="$2"
@@ -40,6 +25,69 @@ currentTime=$(date +%H:%M)
 DefaultCommit="Updated on $currentDate at $currentTime"
 confirm="y"
 
+interactiveModeMenu() {
+    echo "
+    1. git status
+    2. git log
+    3. git diff
+    4. git branch
+    5. git push
+    6. git config
+    7. clear screen
+    8. exit
+    "
+}
+
+interactiveMode() {
+    while [ 1 == 1 ]; do
+        interactiveMode
+        read -p "Enter your choice: " choice
+        case $choice in
+            1) git status ;;
+            2) git log ;;
+            3) git diff ;;
+            6) gitConfig ;;
+            7) clear ;;
+            8) exit 0 ;;
+            *) echo "Invalid Option!!!" ;;
+        esac
+    done
+}
+
+gitConfigMenu() {
+    echo "
+    1. show config
+    2. set config
+    3. back to main
+    4. exit
+    "
+}
+
+gitConfig() {
+    while [ 1 == 1 ]
+    do
+        gitConfigMenu
+        read -p "Enter your option: " op
+        case $op in
+        1) git config -l ;;
+        2) 
+            read -p "Enter name: " name
+            read -p "Enter email: " email
+            read -p "Save config local to repo or global (l/g): [g]" ch
+            if [[ $ch == 'l' ]]; then
+                git config --local user.name $name
+                git config --local user.email $email
+            else
+                git config --global user.name $name
+                git config --global user.email $email
+            fi
+            ;;
+        3) interactiveMode ;;
+        4) exit 0 ;;
+        *) echo "Invalid Option!!!" ;;
+        esac
+    done
+}
 
 Help() {
     echo
@@ -70,9 +118,9 @@ Default() {
 
     echo
     echo
-    echo    "##########################################################"
-    echo    "#                  Default Mode Started                  #"
-    echo    "##########################################################"
+    echo "##########################################################"
+    echo "#                  Default Mode Started                  #"
+    echo "##########################################################"
     echo
     echo
     git status
@@ -90,37 +138,23 @@ Default() {
     git push
     echo
     echo
-    echo    "##########################################################"
-    echo    "#                       It's Done.                       #"
-    echo    "##########################################################"
+    echo "##########################################################"
+    echo "#                       It's Done.                       #"
+    echo "##########################################################"
     echo
     echo
-
-
 
 }
 
-
-# To check if interactive mode is activated or not
 if [[ $op1 == "-i" ]]; then
-    echo 
-    echo
-    echo    "#############################################################"
-    echo    "#          Interactive mode will be added soon.             #"
-    echo    "#  Use -h or --help for get the list of available options.  #"
-    echo    "#############################################################"
-    echo
-    echo
-    exit 0
+    interactiveMode
 fi
-
 
 #To check if no parameters is passed
 if [ $# == 0 ]; then
     Default
     exit 0
 fi
-
 
 #To check conditions for arguments and parameters
 if [[ $op1 == "--help" ]]; then
@@ -137,16 +171,16 @@ fi
 function add {
     if [[ $op1 == "--files" ]]; then
         read -p "Enter filenames seperated by space: " nfiles
-    
+
     elif [[ $op1 == "-f" ]]; then
         read -p "Enter filenames seperated by space: " nfiles
 
     fi
     git add ${nfiles[*]}
-    
+
 }
 
-#Function to commit 
+#Function to commit
 function com {
     echo "Default commmit message is: ($DefaultCommit)"
     read -p "Do you want to change it? [y]: " confirm
@@ -158,11 +192,10 @@ function com {
     fi
 }
 
-
 git status
 echo
 read -p "Press any key to continue..."
-add         #calling add function
+add #calling add function
 echo
 git status
 read -p "Press any key to continue..."
@@ -170,8 +203,7 @@ echo
 com
 echo
 
-git push 
-
+git push
 
 ####################################################################
 ##                                                                ##
@@ -183,6 +215,3 @@ git push
 ##         #  #    #  ######       #######   #    ##  #####       ##
 ##                                                                ##
 ####################################################################
-
-
-
