@@ -1,6 +1,6 @@
 #!/bin/bash
-
-currentDir=$(dirname "$0")
+currentDir=$(dirname "$(readlink -f "$0")")
+echo "$currentDir"
 
 installPermanently(){
     shell=$(basename "$SHELL")
