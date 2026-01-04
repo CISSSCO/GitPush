@@ -1,0 +1,208 @@
+#+title: GitPush Documentation
+#+AUTHOR: Cisco Ramon
+#+OPTIONS: toc:nil num:nil
+
+* HOW TO USE
+
+This tool uploads your content to GitHub using a single command.
+
+There is nothing complicated to learn. GitPush is designed to be very simple to use.  
+All you need is a basic understanding of how git works.
+
+It is not compulsory to learn all git commands. While using GitPush, you will not necessarily need to know every git command, but it is *highly recommended* that you understand the basics of git and how it works internally.
+
+If you do not know all git commands, do not worry — GitPush abstracts most of them for you.
+
+To see all available commands and options, use:
+
+#+BEGIN_SRC bash
+gitpush -h
+# or
+gitpush --help
+#+END_SRC
+
+* Commands and Uses
+
+Before using GitPush, you must have a git repository.  
+Since GitPush is a git-based tool, you need to:
+
+- Create a GitHub repository
+- Clone it to your local system
+
+You should already know how to create and clone a repository.
+
+** 1. Clone and enter your repository
+
+#+BEGIN_SRC bash
+# Suppose your GitHub username is "username"
+# and your repository name is "test"
+
+git clone https://github.com/username/test.git
+
+# A folder named "test" will be created
+cd test
+
+# You are now inside your repository
+#+END_SRC
+
+** 2. Using GitPush inside a repository
+
+You are free to use normal git commands if you want, but GitPush automates the common workflow using a single command.
+
+** 3. View available options
+
+Inside your git repository, run:
+
+#+BEGIN_SRC bash
+gitpush -h
+#+END_SRC
+
+This will show the list of available options.
+
+** 4. Make changes to your repository
+
+Modify your files as needed:
+- Add files
+- Edit files
+- Delete files
+- Any other changes
+
+** 5. Push all changes using a single command
+
+To upload all changes to GitHub, simply run:
+
+#+BEGIN_SRC bash
+gitpush
+#+END_SRC
+
+This command will:
+- Show git status
+- Add all changes
+- Commit with a default message
+- Push to GitHub
+
+You can visit GitHub to confirm your changes.
+
+Git may ask for your *username* and *password* (or token) to verify your identity.
+
+** 6. Using file-specific mode
+
+To upload a specific file instead of all changes, use:
+
+#+BEGIN_SRC bash
+gitpush -f
+#+END_SRC
+
+Steps:
+- You will be prompted to enter the filename:
+  =Enter filename:=
+- Enter the filename and press Enter
+- You will be asked whether you want to change the default commit message
+
+Default commit message format:
+=Updated on [Date] at [Time]=
+
+- Press =y= to change the message
+- Press =n= or Enter to keep the default
+- If you choose to change it, enter your custom commit message
+- GitPush will commit and push your changes
+
+** 7. Authentication
+
+At the end, git will ask for your GitHub credentials to confirm your identity.
+
+* Interactive Mode (New)
+
+GitPush now provides an *interactive menu-based mode* for better control and ease of use.
+
+To start interactive mode, run:
+
+#+BEGIN_SRC bash
+gitpush -i
+#+END_SRC
+
+This opens a command-line interactive interface where you can perform git operations step by step.
+
+** Main Interactive Menu
+
+When interactive mode starts, you will see the following options:
+
+- Git Status
+- Add Files
+- Commit
+- Push
+- Pull
+- Branch Operations
+- Log
+- Exit
+
+Each option can be selected by entering the corresponding number.
+
+** Git Status
+
+Shows the current status of your repository using:
+
+#+BEGIN_SRC bash
+git status
+#+END_SRC
+
+** Add Files
+
+Provides multiple ways to stage files:
+
+- Add all files
+- Add only modified files
+- Add only untracked files
+- Manually select files from a list
+
+Manual selection allows you to pick files one by one from the repository status.
+
+** Commit
+
+- Displays the current staged changes
+- Uses a default commit message based on date and time
+- Allows you to change the commit message interactively
+- Prevents committing if no files are staged
+
+** Push
+
+Pushes committed changes to the remote repository.
+
+** Pull
+
+Fetches and merges changes from the remote repository.
+
+** Branch Operations
+
+Allows you to:
+
+- List branches
+- Switch between branches
+- Create a new branch
+- Delete an existing branch
+
+** Log
+
+Displays a formatted git log showing:
+- Commit history
+- Branches
+- Graph structure
+
+** Exit
+
+Exits interactive mode safely.
+
+* When to Use Which Mode
+
+- Use *default mode* (=gitpush=) for quick daily pushes
+- Use *interactive mode* (=gitpush -i=) when you need:
+  - Selective staging
+  - Branch management
+  - Controlled commits
+  - Better visibility of repository state
+
+* Enjoy!
+
+GitPush is designed to make git usage faster, safer, and simpler — especially when working from the terminal.
+Doc
+

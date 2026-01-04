@@ -12,177 +12,194 @@
          #######    ######   ##########        ########      #####
 
 
-################################################################################
-################################################################################
-#                            Author: Cisco Ramon                               #
-#                                                                              #
-#                                                                              #
-# Change History                                                               #
-# 01/08/2021  Cisco Ramon   This program is helpful in automating some of the  #
-#                           common task that we perform on regular basis       #
-#                           on git.                                            #
-#                                                                              #
-#                                                                              #
-################################################################################
-################################################################################
+# ===========================
+# Author: Cisco Ramon
+# GitPush v2 (Interactive)
+# ===========================
 
-
-
-
-#These are options asigned to be used as arguments or parameters to calling script
+# ---------- Globals ----------
 op1="$1"
-op2="$2"
-
-#used to take multiple files
-declare -A nfiles
 currentDate=$(date +%b-%d)
 currentTime=$(date +%H:%M)
 DefaultCommit="Updated on $currentDate at $currentTime"
-confirm="y"
 
+# ---------- Utils ----------
+pause() {
+    read -p "Press ENTER to continue..."
+}
 
+# ---------- Help ----------
 Help() {
     echo
-    echo
     echo "################################################################"
+    echo "# Usage: gitpush [options]                                     #"
     echo "#                                                              #"
-    echo "# Usage: gitpush [] [--options]                                #"
-    echo "# Avaiable options:                                            #"
-    echo "#                                                              #"
-    echo "# --default      :   called automatically if no args passed    #"
-    echo "#                    (command) ->  gitpush . DefaultCommit     #"
-    echo "#                    DefaultCommit is Updated on Date at Time  #"
-    echo "#                                                              #"
-    echo "# --help or -h   :   open help or man pages                    #"
-    echo "#                                                              #"
-    echo "# --files or -f  :   ask for number of files as arguments      #"
-    echo "#                                                              #"
-    echo "# --i            :   open interactive menu based cli           #"
-    echo "#                    choose desire option (Added soon)         #"
-    echo "#                                                              #"
+    echo "# Options:                                                     #"
+    echo "#   (no args)    : Default add + commit + push                 #"
+    echo "#   -i           : Interactive menu mode                       #"
+    echo "#   -h | --help  : Show help                                   #"
+    echo "#   -f | --files : Add specific files                          #"
     echo "################################################################"
     echo
-    echo
-
 }
 
+# ---------- Default Mode ----------
 Default() {
+    clear
+    echo "##########################################################"
+    echo "#                  Default Mode Started                  #"
+    echo "##########################################################"
+    echo
 
-    echo
-    echo
-    echo    "##########################################################"
-    echo    "#                  Default Mode Started                  #"
-    echo    "##########################################################"
-    echo
-    echo
     git status
-    echo
+    pause
+
     git add .
+    git status
+    pause
+
+    git commit -m "$DefaultCommit"
+    echo "Commit message: $DefaultCommit"
+    pause
+
+    git push
+
     echo
+    echo "##########################################################"
+    echo "#                       It's Done                        #"
+    echo "##########################################################"
+}
+
+# ---------- Commit ----------
+com() {
+    if git diff --cached --quiet; then
+        echo "No files staged for commit!"
+        pause
+        return
+    fi
+
     git status
     echo
-    echo
-    git commit -m "$DefaultCommit"
-    echo
-    echo "Your commit message is :  $DefaultCommit"
-    echo
-    echo
-    git push
-    echo
-    echo
-    echo    "##########################################################"
-    echo    "#                       It's Done.                       #"
-    echo    "##########################################################"
-    echo
-    echo
+    echo "Default commit message:"
+    echo "  $DefaultCommit"
+    read -p "Change it? [y/N]: " confirm
 
-
-
-}
-
-
-# To check if interactive mode is activated or not
-if [[ $op1 == "-i" ]]; then
-    echo 
-    echo
-    echo    "#############################################################"
-    echo    "#          Interactive mode will be added soon.             #"
-    echo    "#  Use -h or --help for get the list of available options.  #"
-    echo    "#############################################################"
-    echo
-    echo
-    exit 0
-fi
-
-
-#To check if no parameters is passed
-if [ $# == 0 ]; then
-    Default
-    exit 0
-fi
-
-
-#To check conditions for arguments and parameters
-if [[ $op1 == "--help" ]]; then
-    Help
-    exit 0
-fi
-
-if [[ $op1 == "-h" ]]; then
-    Help
-    exit 0
-fi
-
-#Functino defined for git add
-function add {
-    if [[ $op1 == "--files" ]]; then
-        read -p "Enter filenames seperated by space: " nfiles
-    
-    elif [[ $op1 == "-f" ]]; then
-        read -p "Enter filenames seperated by space: " nfiles
-
-    fi
-    git add ${nfiles[*]}
-    
-}
-
-#Function to commit 
-function com {
-    echo "Default commmit message is: ($DefaultCommit)"
-    read -p "Do you want to change it? [y]: " confirm
-    if [ $confirm == "y" ]; then
-        read -p "Enter your commit message: " DefaultCommit
-        git commit -m "$DefaultCommit"
+    if [[ "$confirm" =~ ^[yY]$ ]]; then
+        read -p "Enter commit message: " msg
+        git commit -m "$msg"
     else
         git commit -m "$DefaultCommit"
     fi
 }
 
+# ---------- Interactive Add ----------
+InteractiveAdd() {
+    clear
+    echo "Add Files"
+    echo "--------------------------------"
+    echo "1) Add all files"
+    echo "2) Add modified files"
+    echo "3) Add untracked files"
+    echo "4) Select files manually"
+    echo "5) Back"
+    echo
+    read -p "Choose: " add_choice
 
-git status
-echo
-read -p "Press any key to continue..."
-add         #calling add function
-echo
-git status
-read -p "Press any key to continue..."
-echo
-com
-echo
+    case $add_choice in
+        1) git add . ;;
+        2) git add $(git ls-files -m) ;;
+        3) git add $(git ls-files --others --exclude-standard) ;;
+        4) ManualFileSelect ;;
+        5) return ;;
+        *) echo "Invalid choice"; sleep 1 ;;
+    esac
+}
 
-git push 
+ManualFileSelect() {
+    files=$(git status --porcelain | awk '{print $2}')
 
+    if [ -z "$files" ]; then
+        echo "No files available"
+        pause
+        return
+    fi
 
-####################################################################
-##                                                                ##
-##     ###########                  ########                      ##
-##         #  #    #  ######       #         ##    #  ######      ##
-##        #  #    #  #            #         # #   #    #    #     ##
-##        #  ######  ######       ######    #  #  #    #     #    ##
-##        #  #    #  #            #         #   # #    #    #     ##
-##         #  #    #  ######       #######   #    ##  #####       ##
-##                                                                ##
-####################################################################
+    echo "Select files:"
+    select file in $files "Done"; do
+        [[ $file == "Done" ]] && break
+        git add "$file"
+        echo "Added $file"
+    done
+}
 
+# ---------- Branch Menu ----------
+BranchMenu() {
+    clear
+    echo "Branch Operations"
+    echo "--------------------------------"
+    echo "1) List branches"
+    echo "2) Switch branch"
+    echo "3) Create branch"
+    echo "4) Delete branch"
+    echo "5) Back"
+    echo
+    read -p "Choose: " bchoice
 
+    case $bchoice in
+        1) git branch; pause ;;
+        2) read -p "Branch name: " b; git checkout "$b"; pause ;;
+        3) read -p "New branch name: " b; git checkout -b "$b"; pause ;;
+        4) read -p "Delete branch name: " b; git branch -d "$b"; pause ;;
+        5) return ;;
+    esac
+}
+
+# ---------- Interactive Menu ----------
+InteractiveMenu() {
+    while true; do
+        clear
+        echo "======================================="
+        echo "           GitPush Interactive          "
+        echo "======================================="
+        echo "1) Git Status"
+        echo "2) Add Files"
+        echo "3) Commit"
+        echo "4) Push"
+        echo "5) Pull"
+        echo "6) Branch Operations"
+        echo "7) Log"
+        echo "8) Exit"
+        echo "---------------------------------------"
+        read -p "Select an option [1-8]: " choice
+
+        case $choice in
+            1) git status; pause ;;
+            2) InteractiveAdd ;;
+            3) com ;;
+            4) git push; pause ;;
+            5) git pull; pause ;;
+            6) BranchMenu ;;
+            7) git log --oneline --decorate --graph --all | less ;;
+            8) exit 0 ;;
+            *) echo "Invalid choice"; sleep 1 ;;
+        esac
+    done
+}
+
+# ---------- Argument Handling ----------
+case "$op1" in
+    "-i")
+        InteractiveMenu
+        ;;
+    "-h"|"--help")
+        Help
+        ;;
+    "")
+        Default
+        ;;
+    *)
+        echo "Unknown option: $op1"
+        Help
+        ;;
+esac
 

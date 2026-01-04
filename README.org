@@ -1,0 +1,160 @@
+#+TITLE: GitPush
+#+AUTHOR: Cisco Ramon
+#+OPTIONS: toc:nil num:nil
+
+* GitPush
+
+A simple tool for git to automate some of the commonly used tasks.
+
+* About
+
+Whenever working in a git repository in terminal or shell, you can use this command with desired options and it will do all your tasks automatically.
+
+This tool is mainly intended for Linux terminals, but it also works on WSL for Windows (Ubuntu, Debian, Kali, or any other WSL distribution).  
+It can be used on any operating system that has *bash* available.
+
+Installation and setup instructions are provided below.
+
+* Help
+
+If you use:
+
+#+BEGIN_SRC bash
+gitpush -h
+# or
+gitpush --help
+#+END_SRC
+
+You will get a help page similar to the following:
+
+[[https://i.imgur.com/UtIG21n.png]]
+
+* Supported Platforms
+
+- Any Unix / Linux distribution
+- macOS
+- Windows (via WSL)
+- Android (via Termux)
+
+* System Requirements
+
+- A shell with *bash*
+- git
+
+* Installation
+
+** Android (Termux)
+
+1. Install Termux from the Play Store:  
+   https://play.google.com/store/apps/details?id=com.termux
+2. Update Termux:
+   #+BEGIN_SRC bash
+   pkg update
+   #+END_SRC
+3. Check if git is installed:
+   - Use:
+     #+BEGIN_SRC bash
+     git --version
+     #+END_SRC
+   - If not installed:
+     #+BEGIN_SRC bash
+     pkg install git
+     #+END_SRC
+4. Clone the repository:
+   #+BEGIN_SRC bash
+   git clone https://github.com/CISSSCO/GitPush.git
+   #+END_SRC
+5. Install GitPush:
+   #+BEGIN_SRC bash
+   ./install.sh
+   #+END_SRC
+6. Verify installation:
+   #+BEGIN_SRC bash
+   gitpush -h
+   #+END_SRC
+
+** Unix / Linux / macOS
+
+Steps are mostly similar to Android.
+
+1. Open Terminal or shell
+2. Check if git is installed:
+   #+BEGIN_SRC bash
+   git --version
+   #+END_SRC
+3. Clone and install:
+   #+BEGIN_SRC bash
+   git clone https://github.com/CISSSCO/GitPush.git
+   cd GitPush
+   sudo cp gitpush /usr/bin/gitpush
+   #+END_SRC
+
+   For macOS, if the above does not work:
+   #+BEGIN_SRC bash
+   sudo cp gitpush /bin/gitpush
+   # or ./install.sh
+   #+END_SRC
+4. Verify installation:
+   #+BEGIN_SRC bash
+   gitpush -h
+   #+END_SRC
+
+** Windows
+
+1. Search for *Turn Windows features on or off*
+2. Enable *Windows Subsystem for Linux* and restart
+3. Open *cmd* or *PowerShell*
+4. Install WSL:
+   #+BEGIN_SRC bash
+   wsl --install
+   #+END_SRC
+   You can also install Ubuntu or another Linux distribution from the Microsoft Store:  
+   https://www.microsoft.com/store/productId/9N6SVWS3RX71
+5. If you don’t want to use WSL, download git from:  
+   https://git-scm.com/downloads
+6. Open Ubuntu / another WSL distro, or run:
+   #+BEGIN_SRC bash
+   wsl
+   #+END_SRC
+   Alternatively, open *Git Bash*
+7. Follow Linux steps from this point onward
+8. Check git installation:
+   #+BEGIN_SRC bash
+   git --version
+   #+END_SRC
+9. Clone and install:
+   #+BEGIN_SRC bash
+   git clone https://github.com/CISSSCO/GitPush.git
+   cd GitPush
+   #sudo cp gitpush /usr/bin/gitpush
+   ./install.sh
+   #+END_SRC
+
+   For Git Bash (run as Administrator):
+   #+BEGIN_SRC bash
+   cp -f gitpush /usr/bin/
+   #+END_SRC
+10. Enjoy!
+
+* How to Use
+
+A brief documentation explaining how to use this tool is available.
+
+Open the documentation file:
+[[./DOC.org][DOCUMENTATION]]
+* Support the Project
+
+If you are using this project and find it helpful, or if you want to encourage further development, you can support it by:
+
+- Starring the repository
+- Sharing the project
+- Giving proper credit in your README when using GitPush and linking back to it
+
+Thanks!
+
+* License and Copyright
+
+© 2021 *Cisco Ramon*  
+Licensed under the MIT License  
+[[./LICENSE][MIT License]]
+
